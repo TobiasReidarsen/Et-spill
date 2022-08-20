@@ -28,7 +28,7 @@ let model = {
             genCost: 20,
             genCostGrowth: 1.07,
             owned: 0,
-            upgrade: genUpgrader,
+            genUpgrader: 2
             //globalGenMulti,
             //automaticGenMulti,
         },
