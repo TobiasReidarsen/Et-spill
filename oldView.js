@@ -101,3 +101,33 @@ function upgradeGen() {
 
     }
 };
+
+
+
+/* 
+
+Forskjellige tics. 
+En for å oppdatere verdier som vises,
+og en for logikk (som generators).
+
+Istedenfor at alle gens ticker, så blir det de lager i sekunded legget til en global produksjon
+
+let moneyEarnRate = 0;
+
+first gen lager 0.5 money i sekunded
+
+BigBoyMoney kan være i sin egen funksjon.
+
+for å øke BigBoyMoney, 
+
+let money = 0;
+
+function bigBoyMoneyFunc(money){
+    money += money
+
+}
+
+function exampleGen(){
+    bigBoyMoneyFunc();
+}
+*/
