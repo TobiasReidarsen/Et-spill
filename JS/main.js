@@ -1,14 +1,19 @@
-app = document.getElementById("app");
+
 
 // VIEW
-window.onload
+window.onload = function(){
 view();
+}
+
 function view(){
+    app = document.getElementById("app");
+
     let html = /*HTML*/``;
 
     html += /*HTML*/`
-        <button>Click</button>
+        <h1>${model.currency.cookies}</h1>
+        <button onclick = "model.cookieClick(1)">Click</button>
     `;
 
-    app = html;
+    app.innerHTML = html;
 }
