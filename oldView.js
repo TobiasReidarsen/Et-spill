@@ -5,7 +5,8 @@ let app;
 
 let bigBoyMoney = 0;
 
-const gameSpeed = setInterval(genUpdator, 1000);
+let moneyGrowth = 0;
+
 
 // For showing gens
 let crumbGenGen = false;
@@ -17,7 +18,7 @@ let crumbGenCost = 20;
 let baseCrumbGenCost = 20
 
 // How much a generator creates per tick
-let crumbGenValue = 0;
+let crumbGenValue = 0.5;
 
 // Base value for how much a generator creates per tick
 
@@ -59,18 +60,18 @@ function view() {
 };
 
 // CONTROLLER
-
+genUpdator();
 function genUpdator() {
     genUnlocker();
-
-    bigBoyMoney += crumbGenValue;
+    bigBoyMoney += moneyGrowth;
 
 
     view();
+    setTimeout(genUpdator, 1000);
 };
 
 function genUnlocker() {
-    if (bigBoyMoney >= 20) {
+    if (bigBoyMoney >= crumbGenCost) {
         crumbGenGen = true;
     };
 };
@@ -82,25 +83,35 @@ function moneyMaker() {
     view();
 };
 
-function crumbGen() {
-    if (bigBoyMoney >= crumbGenCost) {
+function crumbGen(){
+    if(crumbGenGen) {
         bigBoyMoney -= crumbGenCost;
-        crumbGenCost = baseCrumbGenCost * (1.07 ** crumbGenNumb);
         crumbGenNumb++;
-        crumbGenValue = (baseCrumbGenValue * crumbGenNumb) * globalGenMulti;
-    };
-    view();
-};
-
-function upgradeGen() {
-    if (bigBoyMoney >= crumbGenUpgradeCost) {
-        bigBoyMoney -= crumbGenUpgradeCost
-        baseCrumbGenValue *= 2;
-        crumbGenUpgradeCost *= 10;
-        crumbGenValue = (baseCrumbGenValue * crumbGenNumb) * globalGenMulti;
-
+        moneyGrowth += (crumbGenValue * crumbGenNumb)*globalGenMulti;
+        crumbGenCost = baseCrumbGenCost *((1.07)**crumbGenNumb);
     }
-};
+    
+}
+
+// function crumbGen() {
+//     if (bigBoyMoney >= crumbGenCost) {
+//         bigBoyMoney -= crumbGenCost;
+//         crumbGenCost = baseCrumbGenCost * (1.07 ** crumbGenNumb);
+//         crumbGenNumb++;
+//         crumbGenValue = (baseCrumbGenValue * crumbGenNumb) * globalGenMulti;
+//     };
+//     view();
+// };
+
+// function upgradeGen() {
+//     if (bigBoyMoney >= crumbGenUpgradeCost) {
+//         bigBoyMoney -= crumbGenUpgradeCost
+//         baseCrumbGenValue *= 2;
+//         crumbGenUpgradeCost *= 10;
+//         crumbGenValue = (baseCrumbGenValue * crumbGenNumb) * globalGenMulti;
+
+//     }
+// };
 
 
 
