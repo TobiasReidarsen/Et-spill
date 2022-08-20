@@ -116,6 +116,14 @@ let moneyEarnRate = 0;
 
 first gen lager 0.5 money i sekunded
 
+så: moneyEarnRate = 0.5;
+
+kjøper man flere gens, så bare legges det på.
+
+2 first gen, gir moneyEarnRate = 1;
+
+
+
 BigBoyMoney kan være i sin egen funksjon.
 
 for å øke BigBoyMoney, 
