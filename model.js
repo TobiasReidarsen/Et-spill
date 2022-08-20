@@ -29,8 +29,8 @@ let model = {
             genCostGrowth: 1.07,
             owned: 0,
             upgrade: genUpgrader,
-            globalGenMulti,
-            automaticGenMulti,
+            //globalGenMulti,
+            //automaticGenMulti,
         },
         {
             genName: "secondGenPlaceholder",
@@ -40,8 +40,8 @@ let model = {
             genCostGrowth: 1.09,
             owned: 0,
             upgrade: genUpgrader,
-            globalGenMulti,
-            automaticGenMulti,
+            //globalGenMulti,
+            //automaticGenMulti,
         },
     ],
 };
