@@ -13,7 +13,6 @@ function view(){
 
     html += /*HTML*/`
             <h1>Big Boy Money: ${generatorModel.currency.bigBoyMoney}</h1>
-            <button onclick="generatorMethods.moneyMaker(${generatorModel.moneyGens[0].value})">${generatorModel.moneyGens[0].text}</button></br></br>
         `;
 
     for(let i = 0; i < generatorModel.moneyGens.length; i++){
@@ -21,10 +20,17 @@ function view(){
             html += /*HTML*/`
             <button 
             class = "${generatorModel.moneyGens[i].class} ${generatorModel.moneyGens[i].id}"
-            onclick = "generatorMethods.moneyMaker(${generatorModel.moneyGens[i].value})">
-            ${generatorModel.moneyGens[i].text} price: ${generatorModel.moneyGens[i].price}</button>
-            </br></br>
+            onclick = "generatorMethods.moneyMaker(${i})">
+            ${generatorModel.moneyGens[i].text} ${generatorModel.moneyGens[i].newPrice ? 'Price: ' + generatorModel.moneyGens[i].newPrice : ''}</button>
+
             `;
+            if(i > 0){
+                html += /*HTML*/`
+                    <button>Uppgrade</button></br></br>
+                `;
+            } else {
+                html += /*HTML*/`</br></br>`;
+            }
         }
     }
 
