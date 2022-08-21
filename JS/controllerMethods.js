@@ -4,12 +4,13 @@ let generatorMethods = {
     moneyMaker: function (number) {
         let addedMoney = generatorModel.moneyGens[number];
 
-        if (generatorModel.currency.bigBoyMoney >= addedMoney.price) {
+        if (generatorModel.currency.bigBoyMoney >= addedMoney.newPrice) {
 
             generatorModel.moneyGens[number].owned++;
+
             generatorModel.moneyGrowth += addedMoney.value;
 
-            generatorModel.currency.bigBoyMoney -= addedMoney.price;
+            generatorModel.currency.bigBoyMoney -= addedMoney.newPrice;
 
             this.priceCalc(number);
 
@@ -20,9 +21,13 @@ let generatorMethods = {
             return;
         }
         console.log('Not enought cash');
+
+        // ////////////////////////// NOT FINISHED
+        //this.notEoughCash(number), 
+        view();
     },
 
-    priceCalc: function (number){
+    priceCalc: function (number) {
         let price = generatorModel.moneyGens[number].price;
         let newPrice = generatorModel.moneyGens[number].newPrice;
         let growth = generatorModel.moneyGens[number].priceGrowth;
@@ -35,11 +40,26 @@ let generatorMethods = {
 
 
     },
+/////////////////////////////// YEAH NOT FINISHED//////////////////////////////////////////////////////////
+    notEoughCash: function (i) {
 
+
+        if (generatorModel.currency.bigBoyMoney <= generatorModel.moneyGens[i].newPrice) {
+            generatorModel.moneyGens[i].text = controllerData.failureToBuyMessage;
+            generatorModel.moneyGens[i].newPrice = '';
+        } else {
+            generatorModel.moneyGens[i].ogText = generatorModel.moneyGens[i].text;
+            view();
+            //this.priceCalc(i);
+        }
+
+    },
+//////////////////////////////////////////////////////////////////////////////////////////////////////
     tick: function () {
         controllerData.tickNumber++;
+        generatorModel.currency.bigBoyMoney += generatorModel.moneyGrowth;
         view();
-        console.log(controllerData.tickNumber);
+        //console.log(controllerData.tickNumber);
         controllerData.timer = window.setTimeout(generatorMethods.tick, 1000);
     },
 }

@@ -3,5 +3,7 @@ let controllerData = {
 
     tickNumber: 0,
     timer: null,
+    
+    failureToBuyMessage: 'Not enough Cash Dumbo bitch!',
 
 }
