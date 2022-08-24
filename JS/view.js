@@ -7,33 +7,37 @@ generatorMethods.tick();
 }
 
 function view(){
-    app = document.getElementById("app");
-
+    let app = document.getElementById("app");
+    let moneyGens = generatorModel.moneyGens;
     let html = /*HTML*/``;
 
     html += /*HTML*/`
-            <h1>Big Boy Money: ${generatorModel.currency.bigBoyMoney}</h1>
+            <div><h1>Big Boy Money: ${generatorModel.currency.bigBoyMoney}</h1></div>
+            <div><p>Du tjener ${generatorModel.moneyGrowth} i sekundet</p></div>
         `;
 
-    for(let i = 0; i < generatorModel.moneyGens.length; i++){
-        if(generatorModel.moneyGens[i].unlocked){
+    for(let i = 0; i < moneyGens.length; i++){
+        if(moneyGens[i].unlocked){
             html += /*HTML*/`
+            <div>
             <button 
-            class = "${generatorModel.moneyGens[i].class} ${generatorModel.moneyGens[i].id}"
+            class = "${moneyGens[i].class} ${moneyGens[i].id}"
             onclick = "generatorMethods.moneyMaker(${i})">
-            ${generatorModel.moneyGens[i].text} ${generatorModel.moneyGens[i].newPrice ? 'Price: ' + generatorModel.moneyGens[i].newPrice : ''}</button>
+            ${moneyGens[i].text} ${moneyGens[i].newPrice ? 'Price: ' + moneyGens[i].newPrice : ''}</button>
+            Du har: ${moneyGens[i].owned} som tjener: ${moneyGens[i].value*moneyGens[i].owned} i sekundet
+            </div>
 
             `;
             if(i > 0){
                 html += /*HTML*/`
-                    <button>Uppgrade</button></br></br>
+                    <div><button onclick="generatorMethods.upgrade(${i})">Upgrade price: ${generatorModel.moneyGens[i].upgradePrice}</button></div></br></br>
                 `;
             } else {
                 html += /*HTML*/`</br></br>`;
             }
         }
     }
-
+    //generatorModel.moneyGens[i].owned
 
     app.innerHTML = html;
 }

@@ -1,6 +1,14 @@
 let generatorMethods = {
     // METHODS
 
+    tick: function () {
+        controllerData.tickNumber++;
+        generatorModel.currency.bigBoyMoney += generatorModel.moneyGrowth;
+        generatorMethods.unlocked();
+        view();
+        controllerData.timer = window.setTimeout(generatorMethods.tick, 1000);
+    },
+
     moneyMaker: function (number) {
         let addedMoney = generatorModel.moneyGens[number];
 
@@ -11,35 +19,45 @@ let generatorMethods = {
 
             generatorModel.currency.bigBoyMoney -= addedMoney.price;
 
-            this.priceCalc(number);
+            this.genBuyPriceCalc(number);
 
             return;
-        } else if (number == 0) {
+        } else if (number === 0) {
 
             generatorModel.currency.bigBoyMoney += addedMoney.value;
             return;
         }
-        console.log('Not enought cash');
+        console.log('Not enough cash');
     },
 
-    priceCalc: function (number){
+    genBuyPriceCalc: function (number){
         let price = generatorModel.moneyGens[number].price;
-        let newPrice = generatorModel.moneyGens[number].newPrice;
         let growth = generatorModel.moneyGens[number].priceGrowth;
         let ownedGen = generatorModel.moneyGens[number].owned;
 
 
         generatorModel.moneyGens[number].newPrice = price * (growth ** ownedGen);
-        console.log(`Prisen er nå: ${newPrice}`);
-
-
 
     },
 
-    tick: function () {
-        controllerData.tickNumber++;
-        view();
-        console.log(controllerData.tickNumber);
-        controllerData.timer = window.setTimeout(generatorMethods.tick, 1000);
+    upgrade: function (number) {
+
+        if(generatorModel.currency.bigBoyMoney > generatorModel.moneyGens[number].upgradePrice){
+            generatorModel.moneyGrowth -= generatorModel.moneyGens[number].value;
+            generatorModel.moneyGrowth += generatorModel.moneyGens[number].value *= 2;
+            generatorModel.currency.bigBoyMoney -= generatorModel.moneyGens[number].upgradePrice;
+            generatorModel.moneyGens[number].upgradePrice = generatorModel.moneyGens[number].upgradePrice*2;
+        } else {
+            console.log("Not enough money");
+        }
+    },
+
+
+    unlocked: function () {
+        for (let i = 0; i < generatorModel.moneyGens.length; i++){
+            if (generatorModel.currency.bigBoyMoney > generatorModel.moneyGens[i].price){
+                generatorModel.moneyGens[i].unlocked = true;
+            }
+        }
     },
 }
