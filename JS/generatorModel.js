@@ -3,7 +3,12 @@ let generatorModel = {
 
     moneyGrowth: 0,
 
-    currency: { bigBoyMoney: 0, },
+    currency: {
+        bigBoyMoney: 0,
+        prestigeCurrency: [
+            {goldenCash: 0},
+        ],
+    },
 
     ////////////////// Multipliers //////////////////
     multipliers: { globalMulti: 1, },
