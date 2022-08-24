@@ -22,7 +22,6 @@ let generatorMethods = {
         }
         console.log('Not enought cash');
 
-        // ////////////////////////// NOT FINISHED
         //this.notEoughCash(number), 
         view();
     },

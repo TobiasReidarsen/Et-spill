@@ -15,7 +15,7 @@ function view() {
             <h1>Big Boy Money: ${generatorModel.currency.bigBoyMoney}</h1>
         `;
 
-    for (let i = 0; i < generatorModel.moneyGens.length; i++) {
+    for (let i = 0; i < generatorModel.moneyGens.lenght; i++) {
         if (generatorModel.moneyGens[i].unlocked) {
             html += /*HTML*/`
             <button 
